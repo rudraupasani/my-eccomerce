@@ -84,9 +84,9 @@ export default function AdminAnalyticsPage() {
    }, [])
 
    const stats = [
-      { label: 'Gross Revenue', value: `$${totalRevenue.toLocaleString()}`, icon: DollarSign, trend: '+12%', positive: true },
+      { label: 'Gross Revenue', value: `₹${totalRevenue.toLocaleString()}`, icon: DollarSign, trend: '+12%', positive: true },
       { label: 'Total Acquisitions', value: orders.length.toString(), icon: ShoppingCart, trend: '+5%', positive: true },
-      { label: 'Average Value', value: `$${aov.toLocaleString(undefined, { maximumFractionDigits: 0 })}`, icon: Target, trend: '-2%', positive: false },
+      { label: 'Average Value', value: `₹${aov.toLocaleString(undefined, { maximumFractionDigits: 0 })}`, icon: Target, trend: '-2%', positive: false },
    ]
 
    if (loading) {
@@ -198,7 +198,7 @@ export default function AdminAnalyticsPage() {
                                     axisLine={false}
                                     tickLine={false}
                                     tick={{ fontSize: 10, fontWeight: 700, fill: 'hsl(var(--muted-foreground))' }}
-                                    tickFormatter={(val) => `$${val}`}
+                                    tickFormatter={(val) => `₹${val}`}
                                  />
                                  <Tooltip
                                     contentStyle={{
@@ -262,7 +262,7 @@ export default function AdminAnalyticsPage() {
                                     <div className="w-3 h-3 rounded-full group-hover:scale-125 transition-transform" style={{ backgroundColor: item.color }} />
                                     <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors">{item.name}</span>
                                  </div>
-                                 <span className="text-xs font-black tracking-tighter">${item.value.toLocaleString()}</span>
+                                 <span className="text-xs font-black tracking-tighter">₹{item.value.toLocaleString()}</span>
                               </div>
                            ))}
                         </div>
@@ -301,7 +301,7 @@ export default function AdminAnalyticsPage() {
                               <div className="flex items-center gap-10">
                                  <div className="text-right">
                                     <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground mb-0.5">Value</p>
-                                    <p className="text-xl font-black tracking-tighter italic text-accent">${Number(order.total).toLocaleString()}</p>
+                                    <p className="text-xl font-black tracking-tighter italic text-accent">₹{Number(order.total).toLocaleString()}</p>
                                  </div>
                                  <Link href={`/admin/orders/${order.id}`} className="w-10 h-10 border border-border rounded-full flex items-center justify-center hover:bg-accent hover:text-white hover:border-accent transition-all">
                                     <ChevronRight className="w-4 h-4" />

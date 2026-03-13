@@ -154,7 +154,7 @@ export default function RegisterPage() {
         </div>
         </ScrollAnimate>
 
-        <p className="text-center text-sm text-muted-foreground mt-6">
+        <p className="text-center text-sm text-muted-foreground mb-10">
           Already have an account?{' '}
           <Link href="/login" className="text-accent font-semibold hover:underline">
             Sign in

@@ -93,7 +93,7 @@ export function ProductDetail({ product, reviews }: ProductDetailProps) {
           </div>
 
           <div className="text-4xl font-black text-accent mb-8">
-            ${product.price.toLocaleString()}
+            ₹{product.price.toLocaleString()}
           </div>
 
           <p className="text-accent/60 text-lg leading-relaxed mb-10 max-w-xl">

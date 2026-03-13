@@ -3,13 +3,15 @@
 import { useState } from 'react'
 import { useAuth } from '@/app/context/auth-context'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { Eye, EyeOff, Loader2, AlertCircle } from 'lucide-react'
 import { ScrollAnimate } from '@/components/scroll-animate'
+import { Suspense } from 'react'
 
-export default function LoginPage() {
+function LoginContent() {
   const { signIn } = useAuth()
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -25,12 +27,13 @@ export default function LoginPage() {
     if (error) {
       setError(error)
     } else {
-      router.push('/')
+      const redirect = searchParams.get('redirect') || '/'
+      router.push(redirect)
     }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-4 pt-16">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4 pt-10">
       <div className="w-full max-w-md">
 
         {/* Brand */}
@@ -110,5 +113,17 @@ export default function LoginPage() {
         </p>
       </div>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-accent"></div>
+      </div>
+    }>
+      <LoginContent />
+    </Suspense>
   )
 }

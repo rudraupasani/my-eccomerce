@@ -1,6 +1,7 @@
 'use client'
 
 import { useCart } from '@/app/context/cart-context'
+import { useAuth } from '@/app/context/auth-context'
 import { ScrollAnimate } from '@/components/scroll-animate'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -10,6 +11,7 @@ import { supabase } from '@/lib/supabase'
 
 export default function CartPage() {
   const { items, removeItem, updateQuantity, total } = useCart()
+  const { user } = useAuth()
   const [cartProducts, setCartProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -120,12 +122,12 @@ export default function CartPage() {
                             <p className="text-xs text-muted-foreground mt-1">SKU: {item.product!.sku}</p>
                           </div>
                           <div className="sm:hidden text-lg font-bold text-accent">
-                            ${(item.price * item.quantity).toLocaleString()}
+                            ₹{(item.price * item.quantity).toLocaleString()}
                           </div>
                         </div>
 
                         <div className="flex items-center gap-2 mb-6">
-                          <span className="text-sm font-semibold text-accent">${item.product!.price.toLocaleString()}</span>
+                          <span className="text-sm font-semibold text-accent">₹{item.product!.price.toLocaleString()}</span>
                           <span className="text-xs text-muted-foreground">each</span>
                         </div>
 
@@ -195,7 +197,7 @@ export default function CartPage() {
                   <div className="space-y-4 mb-8">
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground font-medium">Subtotal</span>
-                      <span className="font-bold">${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+                      <span className="font-bold">₹{subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground font-medium">Shipping</span>
@@ -203,30 +205,39 @@ export default function CartPage() {
                         {shipping === 0 ? (
                           <span className="text-accent uppercase text-xs">Free</span>
                         ) : (
-                          `$${shipping.toLocaleString('en-US', { minimumFractionDigits: 2 })}`
+                          `₹${shipping.toLocaleString('en-US', { minimumFractionDigits: 2 })}`
                         )}
                       </span>
                     </div>
                     <div className="flex justify-between text-sm pb-4 border-b border-border">
                       <span className="text-muted-foreground font-medium">Tax (8%)</span>
-                      <span className="font-bold">${tax.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+                      <span className="font-bold">₹{tax.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
                     </div>
                     <div className="flex justify-between pt-2">
                       <span className="text-lg font-bold">Total</span>
                       <div className="text-right">
-                        <div className="text-2xl font-bold text-accent">${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
+                        <div className="text-2xl font-bold text-accent">₹{grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
                         <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-tighter mt-1">Secure Transaction</div>
                       </div>
                     </div>
                   </div>
 
                   <div className="space-y-4">
-                    <Link
-                      href="/checkout"
-                      className="btn-primary w-full py-4 text-sm"
-                    >
-                      Proceed to Secure Checkout
-                    </Link>
+                    {user ? (
+                      <Link
+                        href="/checkout"
+                        className="btn-primary w-full py-4 text-sm"
+                      >
+                        Proceed to Secure Checkout
+                      </Link>
+                    ) : (
+                      <Link
+                        href="/login?redirect=/cart"
+                        className="btn-primary w-full py-4 text-sm"
+                      >
+                        Login to Checkout
+                      </Link>
+                    )}
                     <p className="text-[10px] text-muted-foreground text-center px-4 leading-relaxed font-medium">
                       By proceeding, you agree to our Terms of Sale and Privacy Policy. All prices in USD.
                     </p>

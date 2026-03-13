@@ -170,7 +170,7 @@ export default function OrderPage({ params }: OrderPageProps) {
                           {item.products?.name || 'Luxury Item'}
                         </Link>
                         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-1">QTY: {item.quantity}</p>
-                        <p className="text-lg font-black text-accent mt-2">${(item.price * item.quantity).toLocaleString()}</p>
+                        <p className="text-lg font-black text-accent mt-2">₹{(item.price * item.quantity).toLocaleString()}</p>
                       </div>
                     </div>
                   ))}
@@ -198,15 +198,15 @@ export default function OrderPage({ params }: OrderPageProps) {
                   <div className="space-y-3">
                     <div className="flex justify-between text-xs">
                       <span className="text-foreground/40 font-bold uppercase tracking-tighter">Subtotal</span>
-                      <span className="font-black">${(order.total - (order.total * 0.08)).toLocaleString()}</span>
+                      <span className="font-black">₹{(order.total - (order.total * 0.08)).toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between text-xs">
                       <span className="text-foreground/40 font-bold uppercase tracking-tighter">Est. Tax</span>
-                      <span className="font-black">${(order.total * 0.08).toLocaleString()}</span>
+                      <span className="font-black">₹{(order.total * 0.08).toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between text-lg font-black pt-4 border-t border-accent/20">
                       <span className="uppercase tracking-tighter">Total</span>
-                      <span className="text-accent">${order.total.toLocaleString()}</span>
+                      <span className="text-accent">₹{order.total.toLocaleString()}</span>
                     </div>
                   </div>
                 </div>

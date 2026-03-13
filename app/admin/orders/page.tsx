@@ -160,7 +160,7 @@ export default function AdminOrdersPage() {
                       <div className="text-[10px] text-muted-foreground font-medium uppercase tracking-tighter">{order.customer_email}</div>
                     </td>
                     <td className="py-5 px-4 font-medium text-muted-foreground">{order.order_items?.length || 0} Items</td>
-                    <td className="py-5 px-4 font-black">${order.total.toLocaleString()}</td>
+                    <td className="py-5 px-4 font-black">₹{order.total.toLocaleString()}</td>
                     <td className="py-5 px-4">
                       <div className="flex flex-col gap-2">
                         <select

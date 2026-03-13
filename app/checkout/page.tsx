@@ -30,6 +30,13 @@ export default function CheckoutPage() {
   const [productsLoading, setProductsLoading] = useState(true)
 
   useEffect(() => {
+    if (!user) {
+      router.push('/login?redirect=/checkout')
+      return
+    }
+  }, [user, router])
+
+  useEffect(() => {
     async function fetchCartProducts() {
       if (items.length === 0) {
         setCartProducts([])
@@ -243,7 +250,7 @@ export default function CheckoutPage() {
                             <div className="flex-1">
                                <h4 className="text-xs font-bold leading-tight">{item.product!.name}</h4>
                                <p className="text-[10px] text-muted-foreground font-medium mt-1">QTY: {item.quantity}</p>
-                               <p className="text-xs font-black text-accent mt-1">${(item.price * item.quantity).toLocaleString()}</p>
+                               <p className="text-xs font-black text-accent mt-1">₹{(item.price * item.quantity).toLocaleString()}</p>
                             </div>
                          </div>
                        ))}
@@ -252,19 +259,19 @@ export default function CheckoutPage() {
                     <div className="p-6 bg-secondary/30 space-y-3 border-t border-border">
                        <div className="flex justify-between text-xs font-medium">
                           <span className="text-muted-foreground">Subtotal</span>
-                          <span className="font-bold">${subtotal.toLocaleString()}</span>
+                          <span className="font-bold">₹{subtotal.toLocaleString()}</span>
                        </div>
                        <div className="flex justify-between text-xs font-medium">
                           <span className="text-muted-foreground font-medium">Shipping</span>
-                          <span>{shipping === 0 ? <span className="text-accent uppercase text-[10px] font-bold">Free</span> : `$${shipping.toLocaleString()}`}</span>
+                          <span>{shipping === 0 ? <span className="text-accent uppercase text-[10px] font-bold">Free</span> : `₹${shipping.toLocaleString()}`}</span>
                        </div>
                        <div className="flex justify-between text-xs font-medium pb-3">
                           <span className="text-muted-foreground font-medium">Est. Tax</span>
-                          <span className="font-bold">${tax.toLocaleString()}</span>
+                          <span className="font-bold">₹{tax.toLocaleString()}</span>
                        </div>
                        <div className="flex justify-between pt-3 border-t border-border">
                           <span className="text-base font-bold">Grand Total</span>
-                          <span className="text-2xl font-black text-accent">${grandTotal.toLocaleString()}</span>
+                          <span className="text-2xl font-black text-accent">₹{grandTotal.toLocaleString()}</span>
                        </div>
                     </div>
 

@@ -98,7 +98,7 @@ export default function AdminDashboard() {
   }, [])
 
   const stats = [
-    { label: 'Total Revenue', value: `$${totalRevenue.toLocaleString()}`, change: 'Live', icon: DollarSign, positive: true },
+    { label: 'Total Revenue', value: `₹${totalRevenue.toLocaleString()}`, change: 'Live', icon: DollarSign, positive: true },
     { label: 'Total Orders', value: totalOrdersCount !== null ? totalOrdersCount.toLocaleString() : '0', change: 'Live', icon: ShoppingCart, positive: true },
     { label: 'Total Products', value: productCount !== null ? productCount.toLocaleString() : '0', change: 'Live', icon: Package, positive: true },
     { label: 'Categories', value: categoryCount !== null ? categoryCount.toLocaleString() : '0', change: 'Live', icon: Users },
@@ -296,7 +296,7 @@ export default function AdminDashboard() {
                       <div className="font-bold text-foreground">{order.shipping_address?.name || 'Valued Guest'}</div>
                       <div className="text-[10px] text-muted-foreground font-medium uppercase tracking-tighter">{order.customer_email}</div>
                     </td>
-                    <td className="py-5 px-4 font-black">${order.total.toLocaleString()}</td>
+                    <td className="py-5 px-4 font-black">₹{order.total.toLocaleString()}</td>
                     <td className="py-5 px-4">
                       <span className={`badge py-1 px-3 ${
                         order.status === 'Delivered' ? 'bg-emerald-500/10 text-emerald-500' :

@@ -142,7 +142,7 @@ export default function OrdersPage() {
                       <div className="flex items-center justify-between md:justify-end gap-10">
                         <div className="text-left md:text-right">
                           <p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground mb-1 opacity-60">Total Value</p>
-                          <p className="text-2xl font-black text-foreground tracking-tighter italic">${Number(order.total).toLocaleString()}</p>
+                          <p className="text-2xl font-black text-foreground tracking-tighter italic">₹{Number(order.total).toLocaleString()}</p>
                         </div>
                         <div className="hidden sm:flex flex-col items-center">
                           <span className={`text-[9px] font-black uppercase tracking-widest px-5 py-2.5 rounded-full border-2 ${order.status === 'Delivered'

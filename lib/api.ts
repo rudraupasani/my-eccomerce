@@ -12,11 +12,14 @@ export async function getCategories() {
   return data as Category[]
 }
 
-export async function createCategory(name: string) {
-  const slug = name.toLowerCase().replace(/\s+/g, '-')
+export async function createCategory(category: { name: string; image_url?: string }) {
+  const slug = category.name.toLowerCase().replace(/\s+/g, '-')
+  const insertData: any = { name: category.name, slug }
+  if (category.image_url) insertData.image_url = category.image_url
+  
   const { data, error } = await supabase
     .from('categories')
-    .insert([{ name, slug }])
+    .insert([insertData])
     .select()
   
   if (error) throw error
@@ -30,6 +33,21 @@ export async function deleteCategory(id: string) {
     .eq('id', id)
   
   if (error) throw error
+}
+
+export async function updateCategory(id: string, updates: Partial<{ name: string; image_url: string }>) {
+  const dbUpdates: any = {}
+  if (updates.name) dbUpdates.name = updates.name
+  if (updates.image_url) dbUpdates.image_url = updates.image_url
+  
+  const { data, error } = await supabase
+    .from('categories')
+    .update(dbUpdates)
+    .eq('id', id)
+    .select()
+
+  if (error) throw error
+  return data[0] as Category
 }
 
 // Products
@@ -88,6 +106,25 @@ export async function uploadProductImage(file: File) {
   const fileExt = file.name.split('.').pop()
   const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`
   const filePath = `${fileName}`
+
+  const { data, error } = await supabase.storage
+    .from('products')
+    .upload(filePath, file)
+
+  if (error) throw error
+
+  const { data: { publicUrl } } = supabase.storage
+    .from('products')
+    .getPublicUrl(filePath)
+
+  return publicUrl
+}
+
+// helper for category images (uses products bucket with categories folder)
+export async function uploadCategoryImage(file: File) {
+  const fileExt = file.name.split('.').pop()
+  const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`
+  const filePath = `categories/${fileName}`
 
   const { data, error } = await supabase.storage
     .from('products')

@@ -33,70 +33,64 @@ export function ProductCard({ product }: ProductCardProps) {
   }
 
   return (
-    <div className="group card-premium flex flex-col h-full bg-white overflow-hidden">
-      <Link href={`/product/${product.id}`} className="block relative aspect-4/5 overflow-hidden bg-secondary m-2 rounded-xl">
+    <div className="group card-premium flex flex-col h-full bg-card border border-border rounded-2xl overflow-hidden hover:border-accent/50 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+      <Link href={`/product/${product.id}`} className="block relative aspect-[3/4] overflow-hidden bg-secondary rounded-t-xl m-0">
         <Image
           src={product.image_url || '/placeholder.png'}
           alt={product.name}
           fill
-          className="object-cover contrast-[1.1] transition-all duration-1000 group-hover:scale-105"
+          className="object-cover transition-all duration-700 group-hover:scale-110"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
         
         {/* Wishlist Button */}
         <button 
           onClick={handleToggleWishlist}
-          className="absolute top-3 right-3 p-3 bg-white border border-accent/20 rounded-full hover:border-accent transition duration-300 z-10"
+          className="absolute top-4 right-4 p-2.5 bg-white/90 backdrop-blur-sm border border-border rounded-full hover:bg-accent hover:text-white hover:border-accent transition-all duration-300 z-10 shadow-lg"
         >
-          <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-accent text-accent' : 'text-accent/20'}`} />
+          <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-current text-accent' : 'text-muted-foreground'}`} />
         </button>
 
         {!product.in_stock && (
-          <div className="absolute inset-0 bg-white/80 flex items-center justify-center z-10">
-            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-accent border-2 border-accent px-6 py-3 rounded-full">Archive</span>
+          <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-10 backdrop-blur-sm">
+            <span className="text-xs font-bold uppercase tracking-widest text-white border border-white px-4 py-2 rounded-lg">Sold Out</span>
           </div>
         )}
-
-        {/* Quick Add Overlay Removed in favor of persistent button */}
       </Link>
 
-      <div className="p-8 flex flex-col flex-1">
-        <div className="mb-6">
-          <Link href={`/product/${product.id}`} className="hover:text-accent transition-colors">
-            <h3 className="text-lg font-black tracking-tight leading-tight uppercase text-accent/90">
+      <div className="p-6 md:p-7 flex flex-col flex-1 gap-5">
+        <div>
+          <Link href={`/product/${product.id}`} className="hover:text-accent transition-colors group/title">
+            <h3 className="text-base md:text-lg font-bold tracking-tight leading-tight text-foreground group-hover/title:text-accent transition-colors">
               {product.name}
             </h3>
           </Link>
-          <div className="h-px w-12 bg-accent mt-4" />
+          <div className="h-0.5 w-8 bg-accent mt-3 group-hover:w-12 transition-all" />
         </div>
 
-        <div className="flex items-center gap-3 mb-8">
-          <div className="flex items-center">
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
-                className={`w-2.5 h-2.5 ${
-                  i < Math.floor(product.rating)
-                    ? 'fill-accent text-accent'
-                    : 'text-accent/10'
-                }`}
+                className={`w-3 h-3 ${i < Math.floor(product.rating) ? 'fill-accent text-accent' : 'text-accent/20'}`}
               />
             ))}
           </div>
-          <span className="text-[8px] font-black uppercase tracking-widest text-accent/30">{product.reviews} COLLECTORS</span>
+          <span className="text-[11px] font-semibold text-muted-foreground">({product.reviews})</span>
         </div>
 
-        <div className="mt-auto flex flex-col gap-6">
-          <div className="flex items-end justify-between">
-            <span className="text-2xl font-black font-sans leading-none text-accent">
-              ${product.price.toLocaleString()}
+        <div className="mt-auto flex flex-col gap-4">
+          <div className="flex items-center justify-between">
+            <span className="text-2xl md:text-3xl font-bold text-foreground">
+              ₹{product.price.toLocaleString()}
             </span>
-            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-accent/40 italic">Private Sale</span>
           </div>
           
           <button
             onClick={handleAddToCart}
             disabled={!product.in_stock}
-            className="w-full btn-primary py-4 text-[10px] font-black tracking-[0.3em] rounded-xl bg-accent text-white hover:bg-accent/80 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+            className="w-full py-3 px-4 text-xs md:text-sm font-bold tracking-wider uppercase rounded-lg bg-accent text-white hover:bg-accent/90 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
           >
             {added ? <Check className="w-4 h-4" /> : <ShoppingBag className="w-4 h-4" />}
             {added ? 'ADDED' : 'ADD TO BAG'}

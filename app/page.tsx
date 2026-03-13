@@ -8,14 +8,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ShieldCheck, Truck, RotateCcw, Gem, Loader2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
-const CATEGORY_IMAGES: Record<string, string> = {
-  'Rings': 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80',
-  'Necklaces': 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&q=80',
-  'Earrings': 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&q=80',
-  'Bracelets': 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&q=80',
-  'Watches': 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80',
-}
 const DEFAULT_CAT_IMAGE = 'https://images.unsplash.com/photo-1515562141207-7a88bb7ce338?w=800&q=80'
 
 export default function Home() {
@@ -55,9 +49,9 @@ export default function Home() {
   return (
     <div className="flex flex-col space-y-0">
 
-      {/* ── Hero Section (Strict White & Gold Minimalism) ── */}
-      <section className="relative min-h-[80vh] flex items-center overflow-hidden bg-white">
-        <div className="absolute inset-x-0 top-0 h-full w-1/2 ml-auto opacity-100">
+      {/* ── Hero Section (Premium Modern Design) ── */}
+     <section className="relative min-h-[80vh]  flex items-center overflow-hidden bg-white">
+        <div className="absolute inset-0 md:inset-x-0 top-0 h-full md:w-1/2 ml-auto opacity-100">
           <Image
             src="/hero-luxury-jewelry.jpg"
             alt="Luxury jewelry"
@@ -98,92 +92,98 @@ export default function Home() {
 
         {/* Vertical Border Decoration (Shadowless) */}
         <div className="absolute right-0 top-0 h-full w-px bg-accent/20" />
+
       </section>
 
-      {/* ── Trust Badges ── */}
-      <section className="bg-card border-b border-border py-8">
+      {/* ── Trust Badges (Modern Cards) ── */}
+      <section className="bg-gradient-to-b from-background to-secondary/30 py-16 md:py-24 border-b border-border">
         <div className="container-xl">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {[
-              { icon: Truck, title: 'Free Shipping', desc: 'On all orders over $1,000' },
-              { icon: ShieldCheck, title: 'Certified Gems', desc: 'Sourced responsibly & ethical' },
-              { icon: RotateCcw, title: 'Easy Returns', desc: '30-day money back guarantee' },
-              { icon: Gem, title: 'Lifetime Warranty', desc: 'Protection for your investment' },
+              { icon: Truck, title: 'Free Shipping', desc: 'On orders over ₹83,000' },
+              { icon: ShieldCheck, title: 'Certified Gems', desc: 'Ethically sourced' },
+              { icon: RotateCcw, title: '30-Day Returns', desc: 'Risk-free guarantee' },
+              { icon: Gem, title: 'Lifetime Warranty', desc: 'Protect your investment' },
             ].map((item, i) => (
-              <div key={i} className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded bg-secondary flex items-center justify-center text-accent shrink-0">
+              <div key={i} className="group p-6 md:p-8 rounded-2xl bg-card border border-border hover:border-accent/50 hover:bg-accent/5 transition-all duration-300 hover:shadow-lg">
+                <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-4 group-hover:bg-accent/20 transition-colors">
                   <item.icon className="w-6 h-6" />
                 </div>
-                <div>
-                  <h4 className="text-sm font-black uppercase tracking-widest leading-tight mb-1">{item.title}</h4>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-accent/50">{item.desc}</p>
-                </div>
+                <h4 className="text-sm md:text-base font-bold uppercase tracking-wider mb-2">{item.title}</h4>
+                <p className="text-xs md:text-sm text-muted-foreground font-medium">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Featured Products ── */}
-      <section id="featured" className="mt-10 section-padding bg-background">
+      {/* ── Featured Products (Modern Grid) ── */}
+      <section id="featured" className="section-padding mt-10 bg-background">
         <div className="container-xl">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between mb-12 md:mb-16 gap-6">
             <ScrollAnimate type="fade-up">
-              <span className="text-accent font-bold tracking-widest text-xs uppercase mb-2 block">
-                Exquisite Selection
-              </span>
-              <h2 className="text-3xl md:text-5xl font-black tracking-tighter mb-0 uppercase text-accent">Featured Pieces</h2>
+              <div>
+                <span className="text-accent font-bold tracking-widest text-xs uppercase mb-3 block opacity-75">
+                  ✨ Exquisite Selection
+                </span>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter uppercase text-foreground">Featured Pieces</h2>
+              </div>
             </ScrollAnimate>
             <ScrollAnimate type="fade-up" delay={100}>
-              <Link href="/products" className="btn-ghost flex items-center gap-2 group">
-                View all products <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <Link href="/products" className="btn-ghost flex items-center gap-2 group whitespace-nowrap">
+                View all <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </ScrollAnimate>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {loading ? (
-              <div className="col-span-full flex justify-center py-12">
+              <div className="col-span-full flex justify-center py-20">
                 <Loader2 className="w-8 h-8 animate-spin text-accent" />
               </div>
-            ) : featuredProducts.map((product, i) => (
-              <ScrollAnimate key={product.id} type="scale-up" delay={([0, 100, 200, 300] as const)[i] ?? 0}>
-                <ProductCard product={product} />
-              </ScrollAnimate>
-            ))}
+            ) : featuredProducts.length > 0 ? (
+              featuredProducts.map((product, i) => (
+                <ScrollAnimate key={product.id} type="scale-up" delay={(i * 100) as any}>
+                  <ProductCard product={product} />
+                </ScrollAnimate>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-20 text-muted-foreground">
+                No products available
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* ── Category Banners (Minimalist Gold Grid) ── */}
-      <section className="py-40 bg-white border-y-2 border-accent/10">
+      {/* ── Category Collections (Modern Grid) ── */}
+      <section className="py-20 md:py-32 bg-gradient-to-b from-white to-secondary/20">
         <div className="container-xl">
-          <div className="flex items-end justify-between mb-24">
-            <div className="max-w-xl">
-              <span className="text-accent text-[10px] font-black uppercase tracking-[0.4em] mb-4 block">Selection</span>
-              <h2 className="text-4xl font-black uppercase tracking-tighter text-accent">The Collections</h2>
-            </div>
+          <div className="mb-12 md:mb-20">
+            <ScrollAnimate type="fade-up">
+              <span className="text-accent text-xs font-bold uppercase tracking-widest mb-4 block opacity-75">
+                ✨ Collections
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter uppercase text-foreground">Explore by Category</h2>
+            </ScrollAnimate>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-2 border-accent/10">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6">
             {categories.slice(0, 4).map((cat, i) => (
-              <ScrollAnimate key={cat.id} type="fade-up" delay={i * 100}>
-                <Link href={`/products?category=${cat.name}`} className={`group relative h-[600px] block bg-white ${i < (categories.length - 1) ? 'lg:border-r-2 border-accent/10' : ''}`}>
-                  <div className="absolute inset-x-0 top-0 h-2/3 overflow-hidden">
+              <ScrollAnimate key={cat.id} type="fade-up" delay={i * 100} className="group">
+                <Link href={`/products?category=${encodeURIComponent(cat.name)}`} className="relative h-72 md:h-80 block rounded-2xl overflow-hidden bg-card border border-border hover:border-accent/50 transition-all duration-300 hover:shadow-xl">
+                  <div className="absolute inset-0">
                     <Image 
-                      src={CATEGORY_IMAGES[cat.name] || DEFAULT_CAT_IMAGE} 
+                      src={cat.image_url || DEFAULT_CAT_IMAGE} 
                       alt={cat.name} 
                       fill 
-                      className="object-cover grayscale-[0.5] contrast-[1.1] group-hover:grayscale-0 transition-all duration-1000" 
+                      className="object-cover group-hover:scale-110 transition-transform duration-500" 
                     />
-                    <div className="absolute inset-0 bg-accent/5" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                   </div>
-                  <div className="absolute inset-x-12 bottom-12">
-                    <span className="text-[10px] font-black text-accent uppercase tracking-[0.4em] mb-4 block">EXPLORE COLLECTION</span>
-                    <h3 className="text-3xl font-black uppercase tracking-tighter mb-8 text-accent/90">{cat.name}</h3>
-                    <div className="inline-block border-b-2 border-accent py-2 text-[9px] font-black uppercase tracking-[0.3em] group-hover:pr-6 transition-all text-accent">
-                      VIEW ARCHIVE
-                    </div>
+                  <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
+                    <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight text-white mb-2 group-hover:text-accent transition-colors">{cat.name}</h3>
+                    <p className="text-xs md:text-sm text-white/80 font-semibold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">Discover Collection</p>
                   </div>
                 </Link>
               </ScrollAnimate>
@@ -192,43 +192,51 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── About Section ── */}
-      <section id="about" className="section-padding">
+
+      {/* ── About Section (Modern) ── */}
+      <section id="about" className="section-padding bg-background">
         <div className="container-xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <ScrollAnimate type="fade-right">
-              <div className="relative h-[600px] border-l-8 border-accent/10 overflow-hidden bg-secondary">
+              <div className="relative h-80 md:h-96 rounded-2xl overflow-hidden border border-border shadow-lg">
                 <Image
                   src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&q=80"
                   alt="Crafting Jewelry"
                   fill
-                  className="object-cover grayscale-[0.3]"
+                  className="object-cover hover:scale-105 transition-transform duration-500"
                 />
+                <div className="absolute inset-0 bg-gradient-to-tr from-black/30 to-transparent" />
               </div>
             </ScrollAnimate>
-            <div>
+            <div className="space-y-8">
               <ScrollAnimate type="fade-left">
-                <span className="text-accent font-bold tracking-widest text-xs uppercase mb-4 block">Our Heritage</span>
-                <h2 className="mb-8 leading-tight">Crafted with Unwavering <br /> Passion and Excellence</h2>
-                <div className="space-y-6 text-muted-foreground text-lg leading-relaxed">
+                <div>
+                  <span className="text-accent font-bold tracking-widest text-xs uppercase mb-4 block opacity-75">📖 Our Heritage</span>
+                  <h2 className="text-3xl sm:text-4xl md:text-4xl font-bold tracking-tighter text-foreground mb-6">Crafted with Passion & Excellence</h2>
+                </div>
+              </ScrollAnimate>
+              <ScrollAnimate type="fade-left" delay={100}>
+                <div className="space-y-5 text-muted-foreground text-base md:text-lg leading-relaxed">
                   <p>
-                    Since our founding, Luxora has been dedicated to creating jewelry that
+                    Since our founding, we've been dedicated to creating jewelry that
                     transcends time. Our master craftspeople combine traditional techniques
-                    with modern design sensibilities.
+                    with modern design sensibilities to create pieces that speak.
                   </p>
                   <p>
                     Every piece is a testament to our commitment to quality, sustainability,
-                    and ethical sourcing. We believe luxury should be meaningful.
+                    and ethical sourcing. We believe true luxury should be meaningful and responsible.
                   </p>
                 </div>
-                <div className="grid grid-cols-2 gap-8 mt-12">
-                  <div>
-                    <h4 className="text-foreground mb-2">Sustainable</h4>
-                    <p className="text-sm">Ethically sourced materials and gems.</p>
+              </ScrollAnimate>
+              <ScrollAnimate type="fade-left" delay={200}>
+                <div className="grid grid-cols-2 gap-6 md:gap-8 pt-6 border-t border-border">
+                  <div className="space-y-2">
+                    <h4 className="text-foreground font-bold text-lg">Sustainable</h4>
+                    <p className="text-sm text-muted-foreground">Ethically sourced materials and conflict-free gems.</p>
                   </div>
-                  <div>
-                    <h4 className="text-foreground mb-2">Artisan</h4>
-                    <p className="text-sm">Handcrafted by master jewelers.</p>
+                  <div className="space-y-2">
+                    <h4 className="text-foreground font-bold text-lg">Artisan Crafted</h4>
+                    <p className="text-sm text-muted-foreground">Handcrafted by master jewelers with decades of experience.</p>
                   </div>
                 </div>
               </ScrollAnimate>
