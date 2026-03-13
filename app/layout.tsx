@@ -21,7 +21,7 @@ const playfairDisplay = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'Luxora — Exquisite Jewelry',
+  title: 'Luxora - Exquisite Jewelry',
   description: 'Discover our curated collection of luxury jewelry, crafted with precision and elegance.',
 }
 

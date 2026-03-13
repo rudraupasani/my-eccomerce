@@ -47,16 +47,16 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="flex flex-col space-y-0">
+    <div className="flex flex-col space-y-0 overflow-x-hidden">
 
       {/* ── Hero Section (Premium Modern Design) ── */}
-     <section className="relative min-h-[80vh]  flex items-center overflow-hidden bg-white">
-        <div className="absolute inset-0 md:inset-x-0 top-0 h-full md:w-1/2 ml-auto opacity-100">
+     <section className="relative min-h-[80vh] flex max-w-full items-center overflow-hidden">
+        <div className="absolute inset-x-0 top-0 h-full w-1/2 ml-auto opacity-100">
           <Image
             src="/hero-luxury-jewelry.jpg"
             alt="Luxury jewelry"
             fill
-            className="object-cover grayscale-[0.2] contrast-[1.1]"
+            className="object-cover  grayscale-[0.2] contrast-[1.1]"
             priority
           />
           <div className="absolute inset-0 bg-linear-to-r from-white via-white/40 to-transparent" />
@@ -246,7 +246,7 @@ export default function Home() {
       </section>
 
       {/* ── Newsletter (Strict White & Gold) ── */}
-      <section className="bg-white py-40 border-t-2 border-accent/10">
+      <section className="hidden md:block bg-white py-40 border-t-2 border-accent/10">
         <div className="container-xl">
           <div className="max-w-4xl mx-auto text-center">
             <ScrollAnimate type="scale-up">

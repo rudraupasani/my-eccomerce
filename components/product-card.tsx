@@ -46,7 +46,7 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Wishlist Button */}
         <button 
           onClick={handleToggleWishlist}
-          className="absolute top-4 right-4 p-2.5 bg-white/90 backdrop-blur-sm border border-border rounded-full hover:bg-accent hover:text-white hover:border-accent transition-all duration-300 z-10 shadow-lg"
+          className="absolute top-4 cursor-pointer right-4 p-2.5 bg-white/90 backdrop-blur-sm border border-border rounded-full hover:bg-accent hover:text-white hover:border-accent transition-all duration-300 z-10 shadow-lg"
         >
           <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-current text-accent' : 'text-muted-foreground'}`} />
         </button>
@@ -90,7 +90,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <button
             onClick={handleAddToCart}
             disabled={!product.in_stock}
-            className="w-full py-3 px-4 text-xs md:text-sm font-bold tracking-wider uppercase rounded-lg bg-accent text-white hover:bg-accent/90 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+            className="w-full py-3 cursor-pointer px-4 text-xs md:text-sm font-bold tracking-wider uppercase rounded-lg bg-accent text-white hover:bg-accent/90 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
           >
             {added ? <Check className="w-4 h-4" /> : <ShoppingBag className="w-4 h-4" />}
             {added ? 'ADDED' : 'ADD TO BAG'}

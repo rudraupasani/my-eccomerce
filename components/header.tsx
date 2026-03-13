@@ -49,7 +49,8 @@ export function Header() {
               { label: 'High Jewelry', href: '/products' },
               { label: 'Rings', href: '/products?category=Rings' },
               { label: 'Necklaces', href: '/products?category=Necklaces' },
-              { label: 'Archive', href: '#' },
+              { label: 'Earrings', href: '/products?category=Earrings' },
+              { label: 'Watches', href: '/products?category=Watches' },
             ].map(item => (
               <Link
                 key={item.label}
@@ -163,7 +164,7 @@ export function Header() {
       </div>
 
       {/* ── Mobile Quick Nav Bar ── */}
-     
+
 
       {/* ── Mobile Nav Menu ── */}
       {menuOpen && (
@@ -224,7 +225,8 @@ export function Header() {
               { label: 'High Jewelry', href: '/products' },
               { label: 'Rings', href: '/products?category=Rings' },
               { label: 'Necklaces', href: '/products?category=Necklaces' },
-              { label: 'Archive', href: '#' },
+              { label: 'Earrings', href: '/products?category=Earrings' },
+              { label: 'Watches', href: '/products?category=Watches' },
             ].map(item => (
               <Link
                 key={item.label}

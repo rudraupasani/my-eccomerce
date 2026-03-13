@@ -194,7 +194,7 @@ export default function ProductsClient({ categoryFilter }: Props) {
                     <div className="flex items-center justify-between">
                       <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Categories</h3>
                       {selectedCategory !== 'All' && (
-                        <button onClick={() => handleCategorySelect('All')} className="text-[10px] font-bold text-accent hover:text-accent/70 uppercase tracking-wider">Reset</button>
+                        <button onClick={() => handleCategorySelect('All')} className="cursor-pointer text-[10px] font-bold text-accent hover:text-accent/70 uppercase tracking-wider">Reset</button>
                       )}
                     </div>
                     <div className="flex flex-col gap-2">
@@ -207,7 +207,7 @@ export default function ProductsClient({ categoryFilter }: Props) {
                           <button
                             key={category}
                             onClick={() => handleCategorySelect(category)}
-                            className={`px-4 py-3 text-sm rounded-lg font-medium transition-all text-left ${
+                            className={`px-4 py-3 cursor-pointer text-sm rounded-lg font-medium transition-all text-left ${
                               selectedCategory === category
                                 ? 'bg-accent text-white shadow-lg'
                                 : 'text-foreground bg-card border border-border hover:border-accent/50 hover:shadow-md hover:bg-secondary/50'
@@ -258,7 +258,7 @@ export default function ProductsClient({ categoryFilter }: Props) {
                   <button className="p-2 bg-white shadow-sm rounded-md text-accent font-bold text-xs uppercase tracking-wider" title="Grid view">
                     <LayoutGrid className="w-4 h-4" />
                   </button>
-                  <button className="p-2 text-muted-foreground hover:text-foreground hover:bg-white/50 rounded-md transition-all text-xs uppercase" title="List view">
+                  <button className="p-2 text-muted-foreground cursor-pointer hover:text-foreground hover:bg-white/50 rounded-md transition-all text-xs uppercase" title="List view">
                     <List className="w-4 h-4" />
                   </button>
                 </div>
@@ -275,7 +275,7 @@ export default function ProductsClient({ categoryFilter }: Props) {
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className="appearance-none w-full px-4 py-2.5 pr-10 border border-border rounded-lg bg-card text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-accent transition hover:border-accent/50"
+                    className="appearance-none cursor-pointer w-full px-4 py-2.5 pr-10 border border-border rounded-lg bg-card text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-accent transition hover:border-accent/50"
                   >
                     <option value="featured">Featured</option>
                     <option value="price-low">Price: Low to High</option>
@@ -296,7 +296,7 @@ export default function ProductsClient({ categoryFilter }: Props) {
                     <span className="text-xs font-semibold text-accent">Search: "{searchQuery}"</span>
                     <button
                       onClick={() => setSearchQuery('')}
-                      className="text-accent hover:text-accent/70 font-bold"
+                      className="text-accent cursor-pointer hover:text-accent/70 font-bold"
                     >
                       ×
                     </button>
@@ -307,7 +307,7 @@ export default function ProductsClient({ categoryFilter }: Props) {
                     <span className="text-xs font-semibold text-accent">{selectedCategory}</span>
                     <button
                       onClick={() => handleCategorySelect('All')}
-                      className="text-accent hover:text-accent/70 font-bold"
+                      className="text-accent cursor-pointer hover:text-accent/70 font-bold"
                     >
                       ×
                     </button>
@@ -318,7 +318,7 @@ export default function ProductsClient({ categoryFilter }: Props) {
                     <span className="text-xs font-semibold text-accent">{range}</span>
                     <button
                       onClick={() => setPriceRanges(prev => prev.filter(r => r !== range))}
-                      className="text-accent hover:text-accent/70 font-bold"
+                      className="text-accent cursor-pointer hover:text-accent/70 font-bold"
                     >
                       ×
                     </button>
@@ -355,13 +355,13 @@ export default function ProductsClient({ categoryFilter }: Props) {
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <a 
                     href="/products"
-                    className="btn-primary"
+                    className="btn-primary cursor-pointer"
                   >
                     View All Products
                   </a>
                   <button
                     onClick={() => setPriceRanges([])}
-                    className="btn-secondary"
+                    className="btn-secondary cursor-pointer"
                   >
                     Clear Price Filters
                   </button>
@@ -384,7 +384,7 @@ export default function ProductsClient({ categoryFilter }: Props) {
               <h2 className="text-lg font-bold uppercase tracking-wider">Filters</h2>
               <button 
                 onClick={() => setShowFilterModal(false)}
-                className="text-muted-foreground hover:text-foreground transition text-2xl"
+                className="text-muted-foreground hover:text-foreground transition text-2xl cursor-pointer"
               >
                 ×
               </button>
@@ -396,7 +396,7 @@ export default function ProductsClient({ categoryFilter }: Props) {
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Categories</h3>
                   {selectedCategory !== 'All' && (
-                    <button onClick={() => handleCategorySelect('All')} className="text-[10px] font-bold text-accent hover:text-accent/70 uppercase tracking-wider">Reset</button>
+                    <button onClick={() => handleCategorySelect('All')} className="text-[10px] cursor-pointer font-bold text-accent hover:text-accent/70 uppercase tracking-wider">Reset</button>
                   )}
                 </div>
                 <div className="grid grid-cols-2 gap-2">
@@ -412,7 +412,7 @@ export default function ProductsClient({ categoryFilter }: Props) {
                           handleCategorySelect(category)
                           setShowFilterModal(false)
                         }}
-                        className={`px-3 py-2 text-xs rounded-lg font-medium transition-all text-center ${
+                        className={`px-3 py-2 cursor-pointer text-xs rounded-lg font-medium transition-all text-center ${
                           selectedCategory === category
                             ? 'bg-accent text-white shadow-lg'
                             : 'text-foreground bg-card border border-border'
@@ -430,7 +430,7 @@ export default function ProductsClient({ categoryFilter }: Props) {
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Price Range</h3>
                   {priceRanges.length > 0 && (
-                    <button onClick={() => setPriceRanges([])} className="text-[10px] font-bold text-accent hover:text-accent/70 uppercase tracking-wider">Reset</button>
+                    <button onClick={() => setPriceRanges([])} className="text-[10px] cursor-pointer font-bold text-accent hover:text-accent/70 uppercase tracking-wider">Reset</button>
                   )}
                 </div>
                 <div className="space-y-2">
@@ -451,7 +451,7 @@ export default function ProductsClient({ categoryFilter }: Props) {
 
             <button
               onClick={() => setShowFilterModal(false)}
-              className="w-full mt-8 btn-primary py-3 font-bold"
+              className="w-full mt-8 btn-primary py-3 font-bold cursor-pointer"
             >
               Apply Filters
             </button>
