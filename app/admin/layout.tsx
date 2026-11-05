@@ -1,8 +1,11 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
+import { notFound } from 'next/navigation'
+import { useAuth } from '@/app/context/auth-context'
 import { AdminSidebar } from '@/components/admin-sidebar'
 import { AdminHeader } from '@/components/admin-header'
+import { Loader2 } from 'lucide-react'
 
 export default function AdminLayout({
   children,
@@ -10,6 +13,22 @@ export default function AdminLayout({
   children: React.ReactNode
 }) {
   const [collapsed, setCollapsed] = React.useState(false)
+  const { user, loading } = useAuth()
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen bg-[#FBFBFA] items-center justify-center">
+        <div className="text-center space-y-3">
+          <Loader2 className="w-8 h-8 animate-spin text-[#C5A059] mx-auto" />
+          <p className="text-xs uppercase tracking-widest text-zinc-500">Authenticating Access…</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!user || user.email !== 'rudraupasani2007@gmail.com') {
+    notFound()
+  }
 
   return (
     <div className="flex min-h-screen bg-[#FBFBFA] text-zinc-900">

@@ -589,14 +589,16 @@ export function Header() {
                     </span>
                   )}
                 </Link>
-                <Link
-                  href="/admin"
-                  onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-2 py-1.5 text-[#C5A059] font-medium"
-                >
-                  <ShieldAlert className="w-4 h-4" />
-                  Admin Console
-                </Link>
+                {user && user.email === 'rudraupasani2007@gmail.com' && (
+                  <Link
+                    href="/admin"
+                    onClick={() => setMenuOpen(false)}
+                    className="flex items-center gap-2 py-1.5 text-[#C5A059] font-medium"
+                  >
+                    <ShieldAlert className="w-4 h-4" />
+                    Admin Console
+                  </Link>
+                )}
               </div>
 
             </div>

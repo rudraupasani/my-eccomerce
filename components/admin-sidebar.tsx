@@ -2,13 +2,13 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { 
-  BarChart3, 
-  Package, 
-  ShoppingCart, 
-  Users, 
-  Settings, 
-  LogOut, 
+import {
+  BarChart3,
+  Package,
+  ShoppingCart,
+  Users,
+  Settings,
+  LogOut,
   ChevronLeft,
   LayoutDashboard,
   Layers,
@@ -34,10 +34,9 @@ export function AdminSidebar({ collapsed, setCollapsed }: AdminSidebarProps) {
   ]
 
   return (
-    <aside 
-      className={`fixed left-0 top-0 z-50 h-screen bg-white border-r border-zinc-200 transition-all duration-300 flex flex-col ${
-        collapsed ? 'w-20' : 'w-72'
-      }`}
+    <aside
+      className={`fixed left-0 top-0 z-50 h-screen bg-white border-r border-zinc-200 transition-all duration-300 flex flex-col ${collapsed ? 'w-20' : 'w-72'
+        }`}
     >
       {/* Brand & Monogram */}
       <div className="h-20 px-6 flex items-center justify-between border-b border-zinc-200 shrink-0">
@@ -57,19 +56,18 @@ export function AdminSidebar({ collapsed, setCollapsed }: AdminSidebarProps) {
       {/* Navigation Links */}
       <nav className="flex-1 px-3 space-y-1 overflow-y-auto py-5">
         {navItems.map((item) => {
-          const isActive = item.exact 
-            ? pathname === item.href 
+          const isActive = item.exact
+            ? pathname === item.href
             : pathname.startsWith(item.href) && item.href !== '/admin'
-          
+
           return (
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3.5 px-3.5 py-2.5 text-xs tracking-wider transition-all rounded-xs ${
-                isActive
+              className={`flex items-center gap-3.5 px-3.5 py-2.5 text-xs tracking-wider transition-all rounded-xs ${isActive
                   ? 'bg-black text-white font-semibold shadow-xs'
                   : 'text-zinc-600 hover:text-black hover:bg-zinc-100'
-              }`}
+                }`}
             >
               <item.icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-[#C5A059]' : 'text-zinc-500'}`} />
               {!collapsed && <span>{item.label}</span>}
@@ -80,7 +78,7 @@ export function AdminSidebar({ collapsed, setCollapsed }: AdminSidebarProps) {
 
       {/* Return to Storefront & Logout */}
       <div className="p-4 border-t border-zinc-200 space-y-1 bg-zinc-50/50">
-        <Link 
+        <Link
           href="/"
           className="flex items-center gap-3 px-3 py-2 text-xs text-zinc-600 hover:text-black hover:bg-white rounded-xs transition-colors"
         >
@@ -98,7 +96,7 @@ export function AdminSidebar({ collapsed, setCollapsed }: AdminSidebarProps) {
       </div>
 
       {/* Collapse Toggle Pill */}
-      <button 
+      <button
         onClick={() => setCollapsed(!collapsed)}
         className="absolute top-7 -right-3.5 w-7 h-7 bg-white text-zinc-700 border border-zinc-300 rounded-full flex items-center justify-center hover:bg-black hover:text-white transition-colors z-20 cursor-pointer shadow-sm"
       >

@@ -22,14 +22,14 @@ export default function AdminDashboard() {
         const { count: pCount, data: products } = await supabase.from('products').select('*, categories(name)', { count: 'exact' })
         const { count: cCount } = await supabase.from('categories').select('*', { count: 'exact', head: true })
         const { count: oCount } = await supabase.from('orders').select('*', { count: 'exact', head: true })
-        
+
         const orders = await getOrders()
-        
+
         setProductCount(pCount)
         setCategoryCount(cCount)
         setTotalOrdersCount(oCount)
         setRecentOrders(orders?.slice(0, 5) || [])
-        
+
         const revenue = orders?.reduce((sum: number, order: any) => sum + Number(order.total), 0) || 0
         setTotalRevenue(revenue)
 
@@ -78,14 +78,14 @@ export default function AdminDashboard() {
         }));
 
         setDynamicProductCategoryData(
-          categoryData.length > 0 
-            ? categoryData 
+          categoryData.length > 0
+            ? categoryData
             : [
-                { name: 'Necklaces', value: 40, color: '#C5A059' },
-                { name: 'Rings', value: 30, color: '#18181B' },
-                { name: 'Earrings', value: 20, color: '#71717A' },
-                { name: 'Bracelets', value: 10, color: '#D4AF37' },
-              ]
+              { name: 'Necklaces', value: 40, color: '#C5A059' },
+              { name: 'Rings', value: 30, color: '#18181B' },
+              { name: 'Earrings', value: 20, color: '#71717A' },
+              { name: 'Bracelets', value: 10, color: '#D4AF37' },
+            ]
         );
 
       } catch (err) {
@@ -104,7 +104,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="space-y-8 text-zinc-900">
-      
+
       {/* ── Page Header ── */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-zinc-200">
         <div>
@@ -119,14 +119,14 @@ export default function AdminDashboard() {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Link 
-            href="/admin/products" 
+          <Link
+            href="/admin/products"
             className="px-5 py-2.5 bg-black text-white hover:bg-zinc-800 text-xs font-semibold tracking-wider uppercase transition-colors shadow-xs"
           >
             Manage Archive
           </Link>
-          <Link 
-            href="/admin/orders" 
+          <Link
+            href="/admin/orders"
             className="px-5 py-2.5 bg-white border border-zinc-300 text-zinc-900 hover:border-black text-xs font-medium tracking-wider uppercase transition-colors shadow-xs"
           >
             Review Orders
@@ -159,7 +159,7 @@ export default function AdminDashboard() {
 
       {/* ── Charts Section ── */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
+
         {/* Sales Chart */}
         <div className="lg:col-span-2 bg-white border border-zinc-200 p-6 sm:p-8 shadow-xs">
           <div className="flex items-center justify-between mb-8">
@@ -176,21 +176,21 @@ export default function AdminDashboard() {
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={dynamicSalesData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="2 2" vertical={false} stroke="#E4E4E7" />
-                <XAxis 
-                  dataKey="month" 
-                  axisLine={false} 
-                  tickLine={false} 
-                  tick={{ fontSize: 11, fill: '#71717A' }} 
+                <XAxis
+                  dataKey="month"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fontSize: 11, fill: '#71717A' }}
                 />
-                <YAxis 
-                  axisLine={false} 
-                  tickLine={false} 
-                  tick={{ fontSize: 11, fill: '#71717A' }} 
+                <YAxis
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fontSize: 11, fill: '#71717A' }}
                 />
-                <Tooltip 
+                <Tooltip
                   cursor={{ fill: 'rgba(0,0,0,0.03)' }}
-                  contentStyle={{ 
-                    backgroundColor: '#FFFFFF', 
+                  contentStyle={{
+                    backgroundColor: '#FFFFFF',
                     border: '1px solid #E4E4E7',
                     borderRadius: '2px',
                     fontSize: '12px',
@@ -210,7 +210,7 @@ export default function AdminDashboard() {
             <h3 className="font-serif text-xl font-normal text-zinc-950 mb-0">Category Proportions</h3>
             <p className="text-xs text-zinc-500 font-light mt-0.5">Inventory distribution by house</p>
           </div>
-          
+
           <div className="relative h-52 my-4">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -225,10 +225,10 @@ export default function AdminDashboard() {
                     <Cell key={`cell-${index}`} fill={entry.color} stroke="#FFFFFF" strokeWidth={2} />
                   ))}
                 </Pie>
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: '#FFFFFF', 
-                    border: '1px solid #E4E4E7', 
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: '#FFFFFF',
+                    border: '1px solid #E4E4E7',
                     borderRadius: '2px',
                     color: '#18181B',
                     fontSize: '12px',
@@ -242,17 +242,17 @@ export default function AdminDashboard() {
               <span className="text-[9px] text-[#C5A059] uppercase tracking-widest font-semibold">Mix</span>
             </div>
           </div>
-          
+
           <div className="space-y-2 pt-2 border-t border-zinc-200">
-             {dynamicProductCategoryData.map(item => (
-               <div key={item.name} className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2">
-                     <span className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
-                     <span className="text-zinc-600 font-light">{item.name}</span>
-                  </div>
-                  <span className="text-zinc-950 font-medium">{item.value}%</span>
-               </div>
-             ))}
+            {dynamicProductCategoryData.map(item => (
+              <div key={item.name} className="flex items-center justify-between text-xs">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
+                  <span className="text-zinc-600 font-light">{item.name}</span>
+                </div>
+                <span className="text-zinc-950 font-medium">{item.value}%</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -264,8 +264,8 @@ export default function AdminDashboard() {
             <h3 className="font-serif text-xl font-normal text-zinc-950 mb-0">Recent Salon Acquisitions</h3>
             <p className="text-xs text-zinc-500 font-light mt-0.5">Latest high fine jewelry orders submitted</p>
           </div>
-          <Link 
-            href="/admin/orders" 
+          <Link
+            href="/admin/orders"
             className="text-xs uppercase tracking-widest text-[#C5A059] hover:text-black transition-colors font-semibold"
           >
             View All Orders →
@@ -312,8 +312,8 @@ export default function AdminDashboard() {
                     {new Date(order.created_at).toLocaleDateString()}
                   </td>
                   <td className="py-4 px-6 text-right">
-                    <Link 
-                      href={`/admin/orders`} 
+                    <Link
+                      href={`/admin/orders`}
                       className="text-zinc-400 hover:text-black"
                     >
                       <MoreHorizontal className="w-4 h-4 ml-auto" />

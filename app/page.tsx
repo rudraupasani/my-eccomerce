@@ -216,6 +216,30 @@ export default function Home() {
       </section>
 
 
+      {/* ── 2. Trust Badges ── */}
+      <section className="bg-white py-10 border-b border-zinc-100">
+        <div className="container-xl">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: Truck, title: 'Free Shipping', desc: 'On orders over ₹83,000' },
+              { icon: ShieldCheck, title: 'Certified Gems', desc: 'Ethically sourced' },
+              { icon: RotateCcw, title: '30-Day Returns', desc: 'Risk-free guarantee' },
+              { icon: Gem, title: 'Lifetime Warranty', desc: 'Protect your investment' },
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-3 p-4">
+                <div className="w-10 h-10 shrink-0 flex items-center justify-center text-[#C5A059]">
+                  <item.icon className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-900">{item.title}</h4>
+                  <p className="text-[11px] text-zinc-500 font-light">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── 3. Featured Pieces (White, Black & Golden Theme, Supabase Products) ── */}
       <section id="featured" className="py-20 sm:py-28 bg-[#FAFAFA]">
         <div className="container-xl">
@@ -228,7 +252,7 @@ export default function Home() {
                 Signature Creations
               </h2>
               <p className="text-xs sm:text-sm text-zinc-600 font-light leading-relaxed">
-                Discover our edit of modern heirlooms  pieces that carry the weight of tradition but are designed for the pulse of today.
+                Discover our edit of modern heirlooms — pieces that carry the weight of tradition but are designed for the pulse of today.
               </p>
             </ScrollAnimate>
           </div>

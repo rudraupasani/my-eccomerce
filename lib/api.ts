@@ -171,11 +171,14 @@ export async function removeFromWishlist(email: string, productId: string) {
 }
 
 // Orders
-export async function createOrder(orderData: any, items: any[]) {
+export async function createOrder(orderData: any, maybeItems?: any[]) {
+  const items = maybeItems || orderData.items || []
+  const { items: _, ...cleanOrderData } = orderData
+
   // 1. Create the Order
   const { data: order, error: orderError } = await supabase
     .from('orders')
-    .insert([orderData])
+    .insert([cleanOrderData])
     .select()
   
   if (orderError) throw orderError
@@ -183,18 +186,20 @@ export async function createOrder(orderData: any, items: any[]) {
   const orderId = order[0].id
 
   // 2. Create Order Items
-  const orderItemsData = items.map(item => ({
-    order_id: orderId,
-    product_id: item.productId,
-    quantity: item.quantity,
-    price: item.price
-  }))
+  if (items && items.length > 0) {
+    const orderItemsData = items.map((item: any) => ({
+      order_id: orderId,
+      product_id: item.productId || item.product_id,
+      quantity: item.quantity,
+      price: item.price
+    }))
 
-  const { error: itemsError } = await supabase
-    .from('order_items')
-    .insert(orderItemsData)
+    const { error: itemsError } = await supabase
+      .from('order_items')
+      .insert(orderItemsData)
 
-  if (itemsError) throw itemsError
+    if (itemsError) throw itemsError
+  }
 
   return order[0]
 }

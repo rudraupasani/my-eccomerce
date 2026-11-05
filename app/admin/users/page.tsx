@@ -14,7 +14,7 @@ export default function AdminUsersPage() {
       try {
         setLoading(true)
         const orders = await getOrders()
-        
+
         // Extract unique customers from orders
         const customerMap = orders.reduce((acc: any, order: any) => {
           const email = order.customer_email || 'salon.client@lumea.com'
@@ -45,8 +45,8 @@ export default function AdminUsersPage() {
     fetchCustomers()
   }, [])
 
-  const filteredCustomers = customers.filter(c => 
-    c.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+  const filteredCustomers = customers.filter(c =>
+    c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     c.email.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
@@ -109,33 +109,33 @@ export default function AdminUsersPage() {
               ) : filteredCustomers.map((user) => (
                 <tr key={user.email} className="hover:bg-zinc-50/70 transition">
                   <td className="py-4 px-6 text-zinc-950 font-medium">
-                     <div className="flex items-center gap-3">
-                        <div className="w-7 h-7 bg-zinc-100 border border-zinc-300 flex items-center justify-center text-[10px] text-[#C5A059] font-serif font-bold">
-                           {user.name.charAt(0)}
-                        </div>
-                        <span>{user.name}</span>
-                     </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-7 h-7 bg-zinc-100 border border-zinc-300 flex items-center justify-center text-[10px] text-[#C5A059] font-serif font-bold">
+                        {user.name.charAt(0)}
+                      </div>
+                      <span>{user.name}</span>
+                    </div>
                   </td>
                   <td className="py-4 px-4 text-zinc-600 font-light">
-                     {user.email}
+                    {user.email}
                   </td>
                   <td className="py-4 px-4 font-serif text-zinc-950 text-sm font-medium">
-                     ₹{user.totalSpent.toLocaleString()}
+                    ₹{user.totalSpent.toLocaleString()}
                   </td>
                   <td className="py-4 px-4 text-zinc-700">
                     {user.orderCount} {user.orderCount === 1 ? 'piece' : 'pieces'}
                   </td>
                   <td className="py-4 px-6 text-zinc-500">
-                     {new Date(user.lastOrder).toLocaleDateString()}
+                    {new Date(user.lastOrder).toLocaleDateString()}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        
+
         <div className="p-4 border-t border-zinc-200 bg-zinc-50/50 flex justify-between items-center text-[11px] text-zinc-500">
-           <span>Total Client Ledger: {customers.length} registered profiles</span>
+          <span>Total Client Ledger: {customers.length} registered profiles</span>
         </div>
       </div>
     </div>
