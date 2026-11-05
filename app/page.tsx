@@ -101,7 +101,7 @@ export default function Home() {
     <div className="flex flex-col space-y-0 overflow-x-hidden bg-white text-zinc-900">
 
       {/* ── 1. Hero Section (ONLY HERO IS BLACK - Image 2 Pixel-Accurate) ── */}
-      <section className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden bg-black text-white pt-20 pb-8 sm:pb-12 px-6 sm:px-12 md:px-16">
+      <section className="relative min-h-[92vh] md:min-h-screen w-full flex flex-col justify-between overflow-hidden bg-black text-white pt-20 pb-8 sm:pb-12 px-6 sm:px-12 md:px-16">
 
         {/* Hero Background Image (Full Image Contained & Fully Visible on Right/Center) */}
         <div className="absolute inset-0 z-0 flex items-center justify-end pointer-events-none">
@@ -120,7 +120,7 @@ export default function Home() {
         </div>
 
         {/* Top/Middle Layer: Main Headline (Left) & Brand Statement (Right) */}
-        <div className="relative z-10 w-full max-w-[1520px] mx-auto my-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-10 sm:pt-16">
+        <div className="relative z-10 w-full max-w-[1520px] mx-auto my-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center  sm:pt-16">
 
           {/* Left Headline Area */}
           <div className="lg:col-span-7 xl:col-span-6 space-y-7">
@@ -142,7 +142,7 @@ export default function Home() {
           {/* Right Upper Description Paragraph (From Reference Image) */}
           <div className="lg:col-span-5 xl:col-span-6 flex justify-start lg:justify-end">
             <div className="max-w-xs sm:max-w-sm text-left lg:text-right space-y-2 lg:mr-6 xl:mr-12">
-              <p className="text-xs sm:text-sm text-zinc-300 font-light leading-relaxed">
+              <p className="lg:hidden text-xs sm:text-sm text-zinc-300 font-light leading-relaxed">
                 The Timeless Pieces Created By Luméa Are Crafted With Precious Metals And Natural Gemstones.
               </p>
             </div>
@@ -216,7 +216,7 @@ export default function Home() {
       </section>
 
 
-      {/* ── 2. Trust Badges ── */}
+      {/* ── 2. Trust Badges ──
       <section className="bg-white py-10 border-b border-zinc-100">
         <div className="container-xl">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
@@ -238,7 +238,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ── 3. Featured Pieces (White, Black & Golden Theme, Supabase Products) ── */}
       <section id="featured" className="py-20 sm:py-28 bg-[#FAFAFA]">
@@ -252,7 +252,7 @@ export default function Home() {
                 Signature Creations
               </h2>
               <p className="text-xs sm:text-sm text-zinc-600 font-light leading-relaxed">
-                Discover our edit of modern heirlooms — pieces that carry the weight of tradition but are designed for the pulse of today.
+                Discover our edit of modern heirlooms  pieces that carry the weight of tradition but are designed for the pulse of today.
               </p>
             </ScrollAnimate>
           </div>
