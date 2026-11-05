@@ -7,7 +7,7 @@ export async function getCategories() {
     .from('categories')
     .select('*')
     .order('name')
-  
+
   if (error) throw error
   return data as Category[]
 }
@@ -16,12 +16,12 @@ export async function createCategory(category: { name: string; image_url?: strin
   const slug = category.name.toLowerCase().replace(/\s+/g, '-')
   const insertData: any = { name: category.name, slug }
   if (category.image_url) insertData.image_url = category.image_url
-  
+
   const { data, error } = await supabase
     .from('categories')
     .insert([insertData])
     .select()
-  
+
   if (error) throw error
   return data[0] as Category
 }
@@ -31,7 +31,7 @@ export async function deleteCategory(id: string) {
     .from('categories')
     .delete()
     .eq('id', id)
-  
+
   if (error) throw error
 }
 
@@ -39,7 +39,7 @@ export async function updateCategory(id: string, updates: Partial<{ name: string
   const dbUpdates: any = {}
   if (updates.name) dbUpdates.name = updates.name
   if (updates.image_url) dbUpdates.image_url = updates.image_url
-  
+
   const { data, error } = await supabase
     .from('categories')
     .update(dbUpdates)
@@ -56,19 +56,19 @@ export async function getProducts(options?: { categoryId?: string; inStock?: boo
     .from('products')
     .select('*, categories(name)')
     .order('created_at', { ascending: false })
-  
+
   if (options?.categoryId) {
     query = query.eq('category_id', options.categoryId)
   }
-  
+
   if (options?.inStock !== undefined) {
     query = query.eq('in_stock', options.inStock)
   }
-  
+
   const { data, error } = await query
-  
+
   if (error) throw error
-  return data as any[] 
+  return data as any[]
 }
 
 export async function createProduct(product: any) {
@@ -76,7 +76,7 @@ export async function createProduct(product: any) {
     .from('products')
     .insert([product])
     .select()
-  
+
   if (error) throw error
   return data[0]
 }
@@ -87,7 +87,7 @@ export async function updateProduct(id: string, updates: any) {
     .update(updates)
     .eq('id', id)
     .select()
-  
+
   if (error) throw error
   return data[0]
 }
@@ -97,7 +97,7 @@ export async function deleteProduct(id: string) {
     .from('products')
     .delete()
     .eq('id', id)
-  
+
   if (error) throw error
 }
 
@@ -145,7 +145,7 @@ export async function getWishlist(email: string) {
     .from('wishlists')
     .select('*, products(*, categories(name))')
     .eq('email', email)
-  
+
   if (error) throw error
   return data
 }
@@ -155,7 +155,7 @@ export async function addToWishlist(email: string, productId: string) {
     .from('wishlists')
     .insert([{ email, product_id: productId }])
     .select()
-  
+
   if (error) throw error
   return data[0]
 }
@@ -166,7 +166,7 @@ export async function removeFromWishlist(email: string, productId: string) {
     .delete()
     .eq('email', email)
     .eq('product_id', productId)
-  
+
   if (error) throw error
 }
 
@@ -180,9 +180,9 @@ export async function createOrder(orderData: any, maybeItems?: any[]) {
     .from('orders')
     .insert([cleanOrderData])
     .select()
-  
+
   if (orderError) throw orderError
-  
+
   const orderId = order[0].id
 
   // 2. Create Order Items
@@ -225,7 +225,7 @@ export async function getOrderById(id: string) {
     .select('*, order_items(*, products(*))')
     .eq('external_id', id)
     .single()
-  
+
   if (error) throw error
   return data
 }
@@ -236,7 +236,7 @@ export async function updateOrderStatus(id: string, status: string) {
     .update({ status })
     .eq('id', id)
     .select()
-  
+
   if (error) throw error
   return data[0]
 }
@@ -247,7 +247,7 @@ export async function getProductById(id: string) {
     .select('*, categories(name)')
     .eq('id', id)
     .single()
-  
+
   if (error) throw error
   return data
 }
@@ -259,7 +259,7 @@ export async function getCart(email: string) {
     .select('*, products(*, categories(name))')
     .eq('email', email)
     .order('created_at', { ascending: true })
-  
+
   if (error) throw error
   return data
 }
@@ -269,7 +269,7 @@ export async function addToCart(email: string, productId: string, quantity: numb
     .from('cart_items')
     .insert([{ email, product_id: productId, quantity, price }])
     .select()
-  
+
   if (error) throw error
   return data[0]
 }
@@ -280,7 +280,7 @@ export async function updateCartQuantity(id: string, quantity: number) {
     .update({ quantity })
     .eq('id', id)
     .select()
-  
+
   if (error) throw error
   return data[0]
 }
@@ -290,7 +290,7 @@ export async function removeFromCart(id: string) {
     .from('cart_items')
     .delete()
     .eq('id', id)
-  
+
   if (error) throw error
 }
 
@@ -299,6 +299,6 @@ export async function clearCart(email: string) {
     .from('cart_items')
     .delete()
     .eq('email', email)
-  
+
   if (error) throw error
 }
